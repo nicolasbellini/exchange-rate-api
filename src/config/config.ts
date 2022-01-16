@@ -2,12 +2,15 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const APIKEY = {
+    key: 'b6d5a2cd13cf62f5f3ce88d9'
+};
+
 const MONGO_OPTIONS = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     socketTimeoutMS: 30000,
     keepAlive: true,
-    poolSize: 50,
     autoIndex: false,
     retryWrites: false
 };
@@ -27,7 +30,8 @@ const SERVER = {
 
 const config = {
     mongo: MONGO,
-    server: SERVER
+    server: SERVER,
+    api: APIKEY
 };
 
 const { MongoClient } = require('mongodb');

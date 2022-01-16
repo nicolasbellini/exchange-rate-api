@@ -3,6 +3,7 @@ import controller from './exchangeRateController';
 
 const router = express.Router();
 
-router.post('/save', controller.saveExchangeRate);
+router.post('/createOrUpdate', controller.createOrUpdateRate);
+router.get('/getRate/:source/:target', controller.getRate);
 
 export = router;

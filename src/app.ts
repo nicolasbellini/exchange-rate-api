@@ -6,13 +6,13 @@ import config from './config/config';
 import exchangeRoutes from './exchange-rate/exchangeRateRoute';
 import mongoose from 'mongoose';
 
-const NAMESPACE = 'Test API';
+const NAMESPACE = 'Exchange Rate API';
 const router = express();
 
 /** Connect to Mongo */
 mongoose
     .connect(config.mongo.url, config.mongo.options)
-    .then((result) => {
+    .then((_) => {
         logging.info(NAMESPACE, 'Mongo Connected');
     })
     .catch((error) => {

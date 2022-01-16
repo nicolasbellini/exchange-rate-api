@@ -4,9 +4,9 @@ import IExchangeRate from './exchangeRateInterface';
 
 const ExchangeRateSchema: Schema = new Schema(
     {
-        rate: { type: String, required: true },
+        rate: { type: Number, required: true },
         source: { type: String, required: true },
-        target: { type: Number, required: true }
+        target: { type: String, required: true }
     },
     {
         timestamps: true

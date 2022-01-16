@@ -4,8 +4,9 @@ DONE:
 -Definir rutas
 -Definir modelo
 -Controller
-
-TODO:
 -Conectar con API
 -Hacer request
+
+TODO:
 -Test
+-Batch

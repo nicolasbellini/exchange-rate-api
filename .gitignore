@@ -1,6 +1,7 @@
 node_modules/**/*
 build/**/*
 certs/**/*
+.idea/
 
 *.jks
 *.p8
@@ -8,5 +9,6 @@ certs/**/*
 *.key
 *.mobileprovision
 *.orig.*
+
 
 package-lock.json
