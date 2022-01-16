@@ -1,0 +1,11 @@
+DONE:
+-Hacer proyecto base
+-Conectar mongo
+-Definir rutas
+-Definir modelo
+-Controller
+
+TODO:
+-Conectar con API
+-Hacer request
+-Test
