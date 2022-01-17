@@ -154,4 +154,62 @@ const getRate = {
     }
 };
 
-export { createOrUpdateRate, getRate };
+const getAllRates = {
+    tags: ['Rates'],
+    description: 'Return all rates',
+    operationId: 'getAllRate',
+    responses: {
+        '200': {
+            content: {
+                'application/json': {
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            result: {
+                                type: 'array',
+                                example: [
+                                    {
+                                        _id: '61e46d176e14c56fec8d8cc7',
+                                        source: 'USD',
+                                        target: 'UYU',
+                                        __v: 0,
+                                        createdAt: '2022-01-16T19:08:07.429Z',
+                                        rate: 44.699,
+                                        updatedAt: '2022-01-17T20:07:47.297Z'
+                                    },
+                                    {
+                                        _id: '61e5c99f6e14c56fec482bae',
+                                        source: 'USD',
+                                        target: 'ARS',
+                                        __v: 0,
+                                        createdAt: '2022-01-17T19:55:12.541Z',
+                                        rate: 103.8643,
+                                        updatedAt: '2022-01-17T20:07:47.292Z'
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        '500': {
+            description: 'Internal Server Error',
+            content: {
+                'application/json': {
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            message: {
+                                type: 'string',
+                                example: 'Internal Server Error'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+};
+
+export { createOrUpdateRate, getRate, getAllRates };

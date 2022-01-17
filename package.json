@@ -5,7 +5,8 @@
   "main": "src/app.ts",
   "scripts": {
     "build": "rm -rf build && prettier --write src/ && tsc",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --timeout 10000 -r ts-node/register 'tests/**/*.ts'"
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha --timeout 10000 -r ts-node/register 'tests/**/*.ts'",
+    "coverage": "nyc npm run test"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "mocha": "^9.1.4",
+    "nyc": "^15.1.0",
     "supertest": "^6.2.1",
     "ts-node": "^10.4.0"
   }

@@ -5,5 +5,6 @@ const router = express.Router();
 
 router.post('/createOrUpdate', controller.createOrUpdateRate);
 router.get('/getRate/:source/:target', controller.getRate);
+router.get('/getAllRates', controller.getAllRates);
 
 export = router;

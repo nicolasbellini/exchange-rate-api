@@ -1,4 +1,4 @@
-import { createOrUpdateRate, getRate } from './rates';
+import { createOrUpdateRate, getRate, getAllRates } from './rates';
 
 const apiDocumentation = {
     openapi: '3.0.1',
@@ -28,6 +28,9 @@ const apiDocumentation = {
         },
         '/api/exchangeRate/getRate/{source}/{target}': {
             get: getRate
+        },
+        '/api/exchangeRate/getAllRates': {
+            get: getAllRates
         }
     }
 };

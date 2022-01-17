@@ -70,7 +70,7 @@ const httpServer = http.createServer(router);
 
 /** Cron job to call the api */
 cron.schedule('0 7 * * * *', function () {
-    rate.getDataForRateAndSave('USD', 'UYU');
+    rate.updateAllRates;
 });
 
 httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server is running ${config.server.hostname}:${config.server.port}`));
