@@ -5,6 +5,10 @@ import logging from './config/logging';
 import config from './config/config';
 import exchangeRoutes from './exchange-rate/exchangeRateRoute';
 import mongoose from 'mongoose';
+import cron from 'node-cron';
+import rate from './exchange-rate/exchangeRateController';
+import swaggerUi from 'swagger-ui-express';
+import { apiDocumentation } from '../docs/apidoc';
 
 const NAMESPACE = 'Exchange Rate API';
 const router = express();
@@ -51,6 +55,7 @@ router.use((req, res, next) => {
 
 /** Routes go here */
 router.use('/api/exchangeRate', exchangeRoutes);
+router.use('/documentation', swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 
 /** Error handling */
 router.use((req, res, next) => {
@@ -63,4 +68,11 @@ router.use((req, res, next) => {
 
 const httpServer = http.createServer(router);
 
+/** Cron job to call the api */
+cron.schedule('0 7 * * * *', function () {
+    rate.getDataForRateAndSave('USD', 'UYU');
+});
+
 httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server is running ${config.server.hostname}:${config.server.port}`));
+
+export default router;

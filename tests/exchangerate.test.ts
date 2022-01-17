@@ -1,28 +1,35 @@
-const mongoose = require('mongoose');
-import logging from '../src/config/logging';
-import ExchangeRateSchema from '../src/exchange-rate/exchangeRateModel';
+import router from '../src/app';
 
-describe('User Model Test', () => {
-    let db;
+import chai from 'chai';
+import chaiHttp from 'chai-http';
 
-    // It's just so easy to connect to the MongoDB Memory Server
-    // By using mongoose.connect
-    beforeAll(async () => {
-        db = await mongoose.connect(process.env.MONGO_URL, {
-            useNewUrlParser: true,
-            useCreateIndex: true
-        });
+chai.use(chaiHttp);
+import 'mocha';
+import { response } from 'express';
+
+chai.use(chaiHttp);
+const expect = chai.expect;
+
+describe('Exchange rate tests', () => {
+    it('should request a rate and save it on the DB', async () => {
+        let res;
+        await chai
+            .request(router)
+            .post('/api/exchangeRate/createOrUpdate')
+            .send({ src: 'USD', trg: 'UYU' })
+            .then((response) => (res = response));
+        expect(res).to.have.status(201);
     });
 
-    it('save a rate with correct values', async () => {
-        const validRate = new ExchangeRateSchema({ rate: 1, origen: 'USD', target: 'DAI' });
-        const savedRate = await validRate.save();
-
-        expect(savedRate._id).toBeDefined();
-        expect(savedRate.rate).toBe(validRate.rate);
-        expect(savedRate.source).toBe(validRate.source);
-        expect(savedRate.target).toBe(validRate.target);
+    it('should request a rate and save it on the DB', () => {
+        return chai
+            .request(router)
+            .get('/api/exchangeRate/getRate/USD/UYU')
+            .then((res) => {
+                console.log(res.body);
+                expect(res).to.have.status(201);
+                expect(res.body.rate.source).to.equal('USD');
+                expect(res.body.rate.target).to.equal('UYU');
+            });
     });
-
-    it('save a rate if it doesnt exist yet', async () => {});
 });
