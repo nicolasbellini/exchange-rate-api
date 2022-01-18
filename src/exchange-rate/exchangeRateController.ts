@@ -12,9 +12,7 @@ const createOrUpdateRate = async (req: Request, res: Response, next: NextFunctio
             rate: result
         });
     } catch (error) {
-        return res.status(500).json({
-            error
-        });
+        return res.status(404).json({ error: 'Rate not found' });
     }
 };
 
@@ -62,7 +60,7 @@ async function getDataForRateAndSave(src: String, trg: String) {
         await axios.get(`https://v6.exchangerate-api.com/v6/${config.api.key}/pair/${src}/${trg}`).then((response) => (rt = response.data.conversion_rate));
         return await ExchangeRateSchema.updateOne({ source: src, target: trg }, { rate: rt }, { upsert: true });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
 
@@ -73,7 +71,7 @@ async function updateAllRates() {
             getDataForRateAndSave(rate.source, rate.target);
         });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
 
