@@ -73,6 +73,6 @@ cron.schedule('0 7 * * * *', function () {
     rate.updateAllRates;
 });
 
-httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server is running ${config.server.hostname}:${config.server.port}`));
+httpServer.listen(process.env.PORT || config.server.port, () => logging.info(NAMESPACE, `Server is running ${config.server.hostname}:${config.server.port}`));
 
 export default router;
