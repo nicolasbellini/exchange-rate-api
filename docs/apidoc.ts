@@ -15,6 +15,10 @@ const apiDocumentation = {
         {
             url: 'http://localhost:1337/',
             description: 'Local Server'
+        },
+        {
+            url: 'https://exchange-rate-back.herokuapp.com/',
+            description: 'Heroku Server'
         }
     ],
     tags: [
