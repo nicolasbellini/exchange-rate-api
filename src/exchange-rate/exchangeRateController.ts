@@ -16,6 +16,19 @@ const createOrUpdateRate = async (req: Request, res: Response, next: NextFunctio
     }
 };
 
+const deleteRate = async (req: Request, res: Response, next: NextFunction) => {
+    let { src, trg } = req.body;
+    console.log(src, trg);
+    try {
+        const result = await ExchangeRateSchema.deleteOne({ source: src, target: trg });
+        return res.status(200).json({
+            result: result
+        });
+    } catch (error) {
+        return res.status(404).json({ error: 'Rate not found' });
+    }
+};
+
 const getRate = async (req: Request, res: Response) => {
     try {
         const result = await ExchangeRateSchema.find({ source: req.params.source, target: req.params.target });
@@ -75,4 +88,4 @@ async function updateAllRates() {
     }
 }
 
-export default { createOrUpdateRate, getRate, updateAllRates, getAllRates };
+export default { createOrUpdateRate, getRate, updateAllRates, getAllRates, deleteRate };
