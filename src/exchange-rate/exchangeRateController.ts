@@ -61,6 +61,22 @@ const getAllRates = async (req: Request, res: Response) => {
     }
 };
 
+const getAllCurrencies = async (req: Request, res: Response) => {
+    try {
+        let result;
+        await axios.get(`https://v6.exchangerate-api.com/v6/${config.api.key}/codes`).then((response) => (result = response.data));
+        if (result.result == 'success') {
+            return res.status(201).json({
+                result
+            });
+        }
+    } catch (error) {
+        return res.status(500).json({
+            error
+        });
+    }
+};
+
 /**
  * @description Calls the api to get the exchange rate and then save it in our database
  * @param src
@@ -88,4 +104,4 @@ async function updateAllRates() {
     }
 }
 
-export default { createOrUpdateRate, getRate, updateAllRates, getAllRates, deleteRate };
+export default { createOrUpdateRate, getRate, updateAllRates, getAllRates, deleteRate, getAllCurrencies };
