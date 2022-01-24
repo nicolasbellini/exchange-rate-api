@@ -66,8 +66,11 @@ const getAllCurrencies = async (req: Request, res: Response) => {
         let result;
         await axios.get(`https://v6.exchangerate-api.com/v6/${config.api.key}/codes`).then((response) => (result = response.data));
         if (result.result == 'success') {
+            let orderedResult = result.supported_codes.map(function (x) {
+                return x[0];
+            });
             return res.status(201).json({
-                result
+                orderedResult
             });
         }
     } catch (error) {
