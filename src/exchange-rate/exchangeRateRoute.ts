@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/createOrUpdate', controller.createOrUpdateRate);
 router.get('/getRate/:source/:target', controller.getRate);
 router.get('/getAllRates', controller.getAllRates);
-router.delete('/deleteRate', controller.deleteRate);
+router.delete('/deleteRate/:source/:target', controller.deleteRate);
 router.get('/getAllCurrencies', controller.getAllCurrencies);
 
 export = router;

@@ -16,11 +16,11 @@ const createOrUpdateRate = async (req: Request, res: Response, next: NextFunctio
     }
 };
 
-const deleteRate = async (req: Request, res: Response, next: NextFunction) => {
-    let { src, trg } = req.body;
-    console.log(src, trg);
+const deleteRate = async (req: Request, res: Response) => {
+    let { source, target } = req.params;
+    console.log(source, target);
     try {
-        const result = await ExchangeRateSchema.deleteOne({ source: src, target: trg });
+        const result = await ExchangeRateSchema.deleteOne({ src: source, target: target });
         return res.status(200).json({
             result: result
         });
